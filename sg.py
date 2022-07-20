@@ -32,9 +32,11 @@ def Sudoku():
 #     print(i*i, "x", i*i)
 size = 9
 board = Sudoku()
-print("\nSudoku sudoku.json created:\n")
+js = {}
+js.update({'sudoku' : board})
+#print("\nSudoku sudoku.json created:\n")
 with open('sudoku.json', 'w') as w:
-    w.write(json.dumps(board))
+    w.write(str(js))
 w.close()
 def solve(sudokuJson):
     if isinstance(sudokuJson, list):
@@ -73,5 +75,9 @@ def solve(sudokuJson):
 with open('sudoku.json','r') as r:
     sjson = r.readline()
 r.close()
-print(r)
+with open('sudoku.json') as r:
+    lines = r.readlines()
+    str_line = str(lines)
+js = json.loads(str_line)
+print(js[0]['sudoku'])
 #solve(sjson)
